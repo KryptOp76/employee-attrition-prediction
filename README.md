@@ -2,7 +2,7 @@
 
 A beginner-level machine learning project developed for **CSE422: Artificial Intelligence**.
 
-The project explores employee attrition using an HR analytics dataset and applies several supervised and unsupervised machine learning techniques to predict whether an employee is likely to stay or leave an organization.
+This project explores employee attrition using an HR analytics dataset and applies supervised and unsupervised machine learning techniques to predict whether an employee is likely to stay or leave an organization.
 
 ## Authors
 
@@ -10,18 +10,34 @@ The project explores employee attrition using an HR analytics dataset and applie
 - Zarifah Morshed Nuren
 
 **Course:** CSE422 - Artificial Intelligence  
+**Section:** 4  
 **Semester:** Summer 2026
+
+---
 
 ## Project Overview
 
-Employee turnover can create significant financial and operational challenges for organizations. The objective of this project is to analyze employee-related factors and build machine learning models for predicting employee attrition.
+Employee turnover can create significant financial and operational challenges for organizations.
+
+The objective of this project is to analyze employee-related factors and build machine learning models for predicting employee attrition.
 
 The target variable is `Attrition`:
 
 - `0` - Employee stayed
 - `1` - Employee left
 
-The project includes exploratory data analysis, preprocessing, feature selection, model training, and model evaluation.
+The project covers:
+
+- Exploratory Data Analysis
+- Data preprocessing
+- Feature encoding and selection
+- Feature scaling
+- Supervised classification
+- Neural networks
+- Unsupervised clustering
+- Model evaluation and comparison
+
+---
 
 ## Dataset
 
@@ -32,52 +48,74 @@ The dataset contains:
 - **27 numerical features**
 - **8 categorical features**
 
-Some of the features include:
+Example features include:
 
 - Age
 - Department
-- Job Role
-- Monthly Income
-- Job Satisfaction
+- JobRole
+- MonthlyIncome
+- JobSatisfaction
 - OverTime
-- Years at Company
-- Work-Life Balance
+- YearsAtCompany
+- WorkLifeBalance
 - Attrition
 
-## Project Workflow
+The dataset was provided for the CSE422 lab project.
 
-### 1. Exploratory Data Analysis
+---
 
-The dataset was analyzed to investigate:
+## Exploratory Data Analysis
+
+Exploratory Data Analysis was performed to examine:
 
 - Missing and duplicate values
-- Class distribution
-- Feature distributions and outliers
-- Correlations with employee attrition
+- Attrition class distribution
+- Feature distributions
+- Skewness and outliers
+- Numerical feature correlations
 - Relationships between categorical features and attrition
-- Multicollinearity between numerical features
+- Multicollinearity among numerical features
 
-### 2. Data Preprocessing
+The dataset contains a noticeable class imbalance, with significantly fewer employees in the `Left` class than in the `Stayed` class.
+
+---
+
+## Data Preprocessing
 
 The preprocessing pipeline includes:
 
+- Checking for null and duplicate values
 - Removing constant and identifier features
-- Encoding categorical variables
-- One-hot encoding nominal features
+- Binary encoding
+- Ordinal encoding
+- One-hot encoding
 - Feature selection
 - Stratified train-test splitting
-- Robust feature scaling
+- Feature scaling using `RobustScaler`
 
-### 3. Machine Learning Models
+The scaler is fitted only on the training data to prevent information leakage.
+
+---
+
+## Machine Learning Models
 
 The following models were implemented:
+
+### Supervised Learning
 
 - Neural Network
 - Logistic Regression
 - Gaussian Naive Bayes
+
+### Unsupervised Learning
+
 - K-Means Clustering
 
-K-Means was used as an unsupervised learning approach, while the other models were trained for supervised binary classification.
+K-Means was trained without using the `Attrition` labels.
+
+For evaluation, the cluster-to-class mapping was determined using the training data and then applied to the test data.
+
+---
 
 ## Model Evaluation
 
@@ -100,9 +138,42 @@ The models were evaluated using:
 | Gaussian Naive Bayes | 0.682 | 0.198 | 0.550 | 0.291 | 0.700 |
 | K-Means Clustering | 0.315 | 0.129 | 0.825 | 0.223 | 0.573 |
 
-Logistic Regression achieved the highest overall accuracy and tied with the Neural Network for the highest AUC. However, Gaussian Naive Bayes achieved substantially higher recall for employees who actually left.
+Logistic Regression achieved the highest overall accuracy and tied with the Neural Network for the highest AUC.
 
-The results also demonstrate why accuracy alone can be misleading for an imbalanced classification problem.
+Gaussian Naive Bayes achieved substantially higher recall for the minority `Left` class, illustrating the trade-off between detecting more employees who leave and producing more false positives.
+
+The results demonstrate why accuracy alone can be misleading for an imbalanced classification problem.
+
+---
+
+## Repository Structure
+
+```text
+employee-attrition-prediction/
+│
+├── data/
+│   └── employee_attrition.csv
+│
+├── notebook/
+│   └── employee_attrition_prediction.ipynb
+│
+├── report/
+│   └── CSE422_employee_attrition_report.pdf
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Project Files
+
+- [Jupyter Notebook](notebook/employee_attrition_prediction.ipynb)
+- [Project Report](report/CSE422_employee_attrition_report.pdf)
+- [Dataset](data/employee_attrition.csv)
+
+---
 
 ## Technologies Used
 
@@ -114,16 +185,54 @@ The results also demonstrate why accuracy alone can be misleading for an imbalan
 - Scikit-learn
 - TensorFlow / Keras
 - SciPy
+- Jupyter Notebook / Google Colab
 
-## Repository Structure
+---
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/KryptOp76/employee-attrition-prediction.git
+cd employee-attrition-prediction
+```
+
+### 2. Install the dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Open the notebook
+
+Open:
 
 ```text
-.
-├── data/
-│   └── employee_attrition.csv
-├── notebook/
-│   └── employee_attrition_prediction.ipynb
-├── report/
-│   └── CSE422_employee_attrition_report.pdf
-├── README.md
-└── requirements.txt
+notebook/employee_attrition_prediction.ipynb
+```
+
+using:
+
+- Jupyter Notebook
+- JupyterLab
+- VS Code
+- Google Colab
+
+Then run the cells sequentially.
+
+---
+
+## Conclusion
+
+This project demonstrates the complete workflow of a beginner-level machine learning classification problem, from exploratory data analysis and preprocessing to model training and evaluation.
+
+The results also highlight an important consideration in imbalanced classification: the most appropriate model depends on the objective and evaluation metric rather than accuracy alone.
+
+---
+
+## Course Information
+
+This project was completed as part of the lab project for **CSE422: Artificial Intelligence**.
+
+The repository is intended for educational and academic purposes.
