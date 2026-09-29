@@ -114,7 +114,6 @@ The results also demonstrate why accuracy alone can be misleading for an imbalan
 - Scikit-learn
 - TensorFlow / Keras
 - SciPy
-- Google Colab
 
 ## Repository Structure
 
